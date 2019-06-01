@@ -12,7 +12,10 @@ def login():
 
     v_player_id = get_authentication(g_cursor, v_username, v_password)
     
-    return jsonify(v_player_id=v_valid_login)
+    if v_player_id == -1:
+        return jsonify(player_id="PLAYER NOT FOUND")
+    else:
+        return jsonify(player_id=v_player_id)
 
 def connect_to_postgres():
     return common_functions_rball.get_pg_connection('rball_app','vMBY8kU3E67Cz2ZC','127.0.0.1','nw_rball_app')
