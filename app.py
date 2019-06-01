@@ -39,6 +39,7 @@ def get_player_info(p_cursor,p_player_id):
     except:
        sys.exit("Unable to query player information...investigate\n" + traceback.format_exc())
     else:
+       print (v_player_info)
        return v_player_info[0][0]
 
 def get_authentication(p_cursor,p_username, p_password):
