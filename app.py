@@ -22,7 +22,6 @@ def playerInfo():
     v_player_id=request.args.get('playerID')
 
     v_player_info = get_player_info(g_cursor, v_player_id)
-    print ("We were here...")
     return v_player_info
         
 
@@ -32,16 +31,12 @@ def connect_to_postgres():
 
 def get_player_info(p_cursor,p_player_id):
     v_query = ("select player_first_name, player_last_name, player_phone, player_email, season_id, skill_id, is_administrator from rball_app.player_info where player_id = " + str(p_player_id))
-    print (v_query)
     try:
-       print("trying to run the query")
        p_cursor.execute(v_query)
        v_player_info = p_cursor.fetchall()
-       print (v_player_info)
     except:
        sys.exit("Unable to query player information...investigate\n" + traceback.format_exc())
     else:
-       print (v_player_info)
        return v_player_info[0][0]
 
 def get_authentication(p_cursor,p_username, p_password):
