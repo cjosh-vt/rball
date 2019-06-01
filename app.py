@@ -16,15 +16,35 @@ def login():
         return jsonify(player_id="PLAYER NOT FOUND")
     else:
         return jsonify(player_id=v_player_id)
+        
+@app.route("/playerInfo",methods=['GET'])
+def playerInfo():
+    v_player_id=request.args.get('playerID')
+
+    v_player_info = get_player_info(g_cursor, v_player_id)
+    
+    return v_player_info
+        
+
 
 def connect_to_postgres():
     return common_functions_rball.get_pg_connection('rball_app','vMBY8kU3E67Cz2ZC','127.0.0.1','nw_rball_app')
+
+def get_player_info(p_cursor,v_player_id):
+    v_query = ("select player_first_name, player_last_name, player_phone, player_email, season_id, skill_id, is_administrator from rball_app.player_info where player_id = " + v_player_id)
+    try:
+       p_cursor.execute(v_query)
+       v_player_info = p_cursor.fetchone()
+    except:
+       sys.exit("Unable to query player information...investigate\n" + traceback.format_exc())
+    else:
+       return jsonify(player_first_name=v_player_info[0][0])
 
 def get_authentication(p_cursor,p_username, p_password):
     v_query = ("select player_id from rball_app.auth_login where username = '" + p_username + "' and password = '" + p_password + "'")
     try:
        p_cursor.execute(v_query)
-       v_auth_info = p_cursor.fetchall()
+       v_auth_info = p_cursor.fetchone()
     except:
        sys.exit("Unable to query database...investigate\n" + traceback.format_exc())
 
