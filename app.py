@@ -29,14 +29,18 @@ def get_authentication(p_cursor,p_username, p_password):
        return v_auth_info[0][0]
     else:
        return -1
-       
 
-if __name__ == '__main__':
+def get_connection():
     try:
        global g_cursor
        v_conn=connect_to_postgres()
        g_cursor=v_conn.cursor()
     except:
        sys.exit ("Whoops...you're still dumb...\n" + traceback.format_exc())
+       
 
+if __name__ == '__main__':
+
+    get_connection()
+    
     app.run('0.0.0.0',port=80)
