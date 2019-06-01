@@ -1,7 +1,7 @@
 #!bin/bash
-pip install flask
-pip install virtualenv
-pip install flask_sqlalchemy
-pip install flask_script
-pip install flask_migrate
-pip install psycopg2-binary
+pip3 install flask
+pip3 install virtualenv
+pip3 install flask_sqlalchemy
+pip3 install flask_script
+pip3 install flask_migrate
+pip3 install psycopg2-binary
