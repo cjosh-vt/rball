@@ -30,7 +30,7 @@ def get_authentication(p_cursor,p_username, p_password):
        sys.exit("Unable to query database...investigate\n" + traceback.format_exc())
 
     print ("passed fetch")
-    if v_auth_info.length > 0:
+    if v_auth_info.len() > 0:
        return v_auth_info[0]
     else:
        return -1
