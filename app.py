@@ -40,6 +40,7 @@ def connect_to_postgres():
 
 def get_player_info(p_cursor,p_player_id):
     v_query = ("select player_first_name, player_last_name, player_phone, player_email, season_description, skill_description, is_administrator from rball_app.player_info where player_id = " + str(p_player_id))
+    print (v_query)
     try:
        p_cursor.execute(v_query)
        v_player_info = p_cursor.fetchall()
