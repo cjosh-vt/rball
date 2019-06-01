@@ -47,6 +47,7 @@ def get_player_info(p_cursor,p_player_id):
        v_player_info = p_cursor.fetchall()
        print (v_player_info)
     except:
+       print ("The exceptions just don't show \n" + traceback.format_exc())
        sys.exit("Unable to query player information...investigate\n" + traceback.format_exc())
     else:
        return v_player_info[0][0]
