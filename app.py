@@ -26,7 +26,7 @@ def get_authentication(p_cursor,p_username, p_password):
        sys.exit("Unable to query database...investigate\n" + traceback.format_exc())
 
     if len(v_auth_info) > 0:
-       return v_auth_info[0]
+       return v_auth_info[0][0]
     else:
        return -1
        
