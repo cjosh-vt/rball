@@ -23,6 +23,8 @@ def playerInfo():
 
     v_player_info = get_player_info(g_cursor, v_player_id)
     
+    print (v_player_info)
+    
     return jsonify(player_first_name=v_player_info[0][0],
           player_last_name=v_player_info[0][1],
           player_phone=v_player_info[0][2],
