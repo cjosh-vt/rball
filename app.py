@@ -14,7 +14,7 @@ def login():
     
     print ("got past" + str(v_valid_login))
     
-    return v_valid_login
+    return str(v_valid_login)
 
 def connect_to_postgres():
     return common_functions_rball.get_pg_connection('rball_app','vMBY8kU3E67Cz2ZC','127.0.0.1','nw_rball_app')
