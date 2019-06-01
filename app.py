@@ -47,7 +47,7 @@ def get_authentication(p_cursor,p_username, p_password):
     v_query = ("select player_id from rball_app.auth_login where username = '" + p_username + "' and password = '" + p_password + "'")
     try:
        p_cursor.execute(v_query)
-       v_auth_info = p_cursor.fetchone()
+       v_auth_info = p_cursor.fetchall()
     except:
        sys.exit("Unable to query database...investigate\n" + traceback.format_exc())
 
