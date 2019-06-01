@@ -18,7 +18,7 @@ def connect_to_postgres():
     return common_functions_rball.get_pg_connection('rball_app','vMBY8kU3E67Cz2ZC','127.0.0.1','nw_rball_app')
 
 def get_authentication(p_cursor,p_username, p_password):
-    v_query = ("select player_id, username, password from rball_app.auth_login where username = '" + p_username + "' and password = '" + p_password + "'")
+    v_query = ("select player_id from rball_app.auth_login where username = '" + p_username + "' and password = '" + p_password + "'")
     try:
        p_cursor.execute(v_query)
        v_auth_info = p_cursor.fetchall()
