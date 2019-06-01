@@ -1,25 +1,23 @@
-from app import db
+#from app import db
 
-class Book(db.Model):
-    __tablename__ = 'books'
+class Authenticate_db(db.Model):
+    __tablename__ = 'auth_login'
 
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String())
-    author = db.Column(db.String())
-    published = db.Column(db.String())
+    player_id=db.Column(db.Integer,primary_key = True)
+    username = db.Column(db.String())
+    password= db.Column(db.String())
 
-    def __init__(self, name, author, published):
-        self.name = name
-        self.author = author
-        self.published = published
+    def __init__(self, username, password):
+        self.player_id = player_id
+        self.username = username
+        self.password = password
 
     def __repr__(self):
-        return '<id {}>'.format(self.id)
+        return f"<username {(self.username)}>"
     
     def serialize(self):
         return {
-            'id': self.id, 
-            'name': self.name,
-            'author': self.author,
-            'published':self.published
+            'player_id': self.player_id,
+            'username': self.username, 
+            'password': self.password
         }
