@@ -12,8 +12,6 @@ def login():
 
     v_valid_login = get_authentication(g_cursor, v_username, v_password)
     
-    print ("got past" + str(v_valid_login))
-    
     return str(v_valid_login)
 
 def connect_to_postgres():
@@ -21,15 +19,12 @@ def connect_to_postgres():
 
 def get_authentication(p_cursor,p_username, p_password):
     v_query = ("select player_id, username, password from rball_app.auth_login where username = '" + p_username + "' and password = '" + p_password + "'")
-    print ("query = " + v_query)
     try:
        p_cursor.execute(v_query)
-       print ("passed execute")
        v_auth_info = p_cursor.fetchall()
     except:
        sys.exit("Unable to query database...investigate\n" + traceback.format_exc())
 
-    print ("passed fetch")
     if len(v_auth_info) > 0:
        return v_auth_info[0]
     else:
