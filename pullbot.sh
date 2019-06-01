@@ -7,7 +7,7 @@ do
         git merge origin/master
     then
         echo 'Updated!'
-        kill ${ps -A | grep python3 |cut -c2-5}
+        ps -ef | grep -i python3 | grep -i app.py| awk '{kill $2}'
         python3 app.py &
 	echo 'Server Started!'
     fi
