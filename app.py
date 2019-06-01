@@ -14,6 +14,8 @@ def login():
     
     v_valid_login = get_authentication(g_cursor, v_username, v_password)
     
+    print ("got past")
+    
     return v_valid_login
 
 def connect_to_postgres():
@@ -38,6 +40,7 @@ if __name__ == '__main__':
        global g_cursor
        v_conn=connect_to_postgres()
        g_cursor=v_conn.cursor()
+       print ("Global Cursor = " + str(g_cursor))
     except:
        sys.exit ("Whoops...you're still dumb...\n" + traceback.format_exc())
 
