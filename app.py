@@ -10,6 +10,8 @@ def login():
     v_username=request.args.get('username')
     v_password=request.args.get('password')
 
+    print ("v_username = " + str(v_username) + " v_password = " + str(v_password) + " g_cursor = " + str(g_cursor))
+    
     v_valid_login = get_authentication(g_cursor, v_username, v_password)
     
     return v_valid_login
