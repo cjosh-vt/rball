@@ -1,11 +1,20 @@
-import flask
+from flask import Flask, request
 
-app = flask.Flask(__name__)
-app.config["DEBUG"] = True
+app = Flask(__name__)
 
+@app.route("/")
+def hello():
+    return "Hello World!"
 
-@app.route('/', methods=['GET'])
-def home():
-    return "<h1>Distant Reading Archive</h1><p>This site is a prototype API for distant reading of science fiction novels.</p>"
+@app.route("/name/<name>")
+def get_book_name(name):
+    return "name : {}".format(name)
 
-app.run(host='0.0.0.0', port=80)
+@app.route("/details")
+def get_book_details():
+    author=request.args.get('author')
+    published=request.args.get('published')
+    return "Author : {}, Published: {}".format(author,published)
+
+if __name__ == '__main__':
+    app.run('0.0.0.0',port=80)
