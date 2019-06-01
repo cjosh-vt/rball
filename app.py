@@ -31,7 +31,7 @@ def connect_to_postgres():
     return common_functions_rball.get_pg_connection('rball_app','vMBY8kU3E67Cz2ZC','127.0.0.1','nw_rball_app')
 
 def get_player_info(p_cursor,p_player_id):
-    v_query = ("select player_first_name, player_last_name, player_phone, player_email, season_id, skill_id, is_administrator from rball_app.player_info where player_id = " + p_player_id)
+    v_query = ("select player_first_name, player_last_name, player_phone, player_email, season_id, skill_id, is_administrator from rball_app.player_info where player_id = " + str(p_player_id))
     print (v_query)
     try:
        p_cursor.execute(v_query)
