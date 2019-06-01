@@ -47,8 +47,7 @@ def get_player_info(p_cursor,p_player_id):
        v_player_info = p_cursor.fetchall()
        print (v_player_info)
     except:
-       print ("The exceptions just don't show \n" + traceback.format_exc())
-       sys.exit("Unable to query player information...investigate\n" + traceback.format_exc())
+       print ("Unable to query player information...investigate\n" + traceback.format_exc())
     else:
        return v_player_info[0][0]
 
@@ -58,7 +57,7 @@ def get_authentication(p_cursor,p_username, p_password):
        p_cursor.execute(v_query)
        v_auth_info = p_cursor.fetchall()
     except:
-       sys.exit("Unable to query database...investigate\n" + traceback.format_exc())
+       print("Unable to query database...investigate\n" + traceback.format_exc())
 
     if len(v_auth_info) > 0:
        return v_auth_info[0][0]
@@ -71,7 +70,7 @@ def get_connection():
        v_conn=connect_to_postgres()
        g_cursor=v_conn.cursor()
     except:
-       sys.exit ("Whoops...you're still dumb...\n" + traceback.format_exc())
+       print ("Whoops...you're still dumb...\n" + traceback.format_exc())
        
 
 if __name__ == '__main__':
