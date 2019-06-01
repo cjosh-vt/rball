@@ -34,6 +34,7 @@ def get_player_info(p_cursor,p_player_id):
     v_query = ("select player_first_name, player_last_name, player_phone, player_email, season_id, skill_id, is_administrator from rball_app.player_info where player_id = " + str(p_player_id))
     print (v_query)
     try:
+       print("trying to run the query")
        p_cursor.execute(v_query)
        v_player_info = p_cursor.fetchall()
        print ("i was here")
