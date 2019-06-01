@@ -35,7 +35,7 @@ def get_player_info(p_cursor,p_player_id):
     print (v_query)
     try:
        p_cursor.execute(v_query)
-       v_player_info = p_cursor.fetchone()
+       v_player_info = p_cursor.fetchall()
        print ("i was here")
     except:
        sys.exit("Unable to query player information...investigate\n" + traceback.format_exc())
