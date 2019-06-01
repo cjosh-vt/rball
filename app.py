@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import common_functions_rball
 import traceback
 import sys
@@ -10,9 +10,9 @@ def login():
     v_username=request.args.get('username')
     v_password=request.args.get('password')
 
-    v_valid_login = get_authentication(g_cursor, v_username, v_password)
+    v_player_id = get_authentication(g_cursor, v_username, v_password)
     
-    return str(v_valid_login)
+    return jsonify(v_player_id=v_valid_login)
 
 def connect_to_postgres():
     return common_functions_rball.get_pg_connection('rball_app','vMBY8kU3E67Cz2ZC','127.0.0.1','nw_rball_app')
