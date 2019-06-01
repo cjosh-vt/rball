@@ -25,13 +25,7 @@ def playerInfo():
     
     print (v_player_info)
     
-    return jsonify(player_first_name=v_player_info[0][0],
-          player_last_name=v_player_info[0][1],
-          player_phone=v_player_info[0][2],
-          player_email=v_player_info[0][3],
-          season_description=v_player_info[0][4],
-          skill_description=v_player_info[0][5],
-          is_administrator=v_player_info[0][6])
+    return v_player_info
         
 
 
@@ -49,7 +43,13 @@ def get_player_info(p_cursor,p_player_id):
     except:
        print ("Unable to query player information...investigate\n" + traceback.format_exc())
     else:
-       return v_player_info[0]
+       return jsonify(player_first_name=v_player_info[0][0],
+          player_last_name=v_player_info[0][1],
+          player_phone=v_player_info[0][2],
+          player_email=v_player_info[0][3],
+          season_description=v_player_info[0][4],
+          skill_description=v_player_info[0][5],
+          is_administrator=v_player_info[0][6])
 
 def get_authentication(p_cursor,p_username, p_password):
     v_query = ("select player_id from rball_app.auth_login where username = '" + p_username + "' and password = '" + p_password + "'")
