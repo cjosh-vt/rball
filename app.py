@@ -37,7 +37,7 @@ def playerInfo():
     else:
        v_player_info = -1
     
-    if v_player_info = -1:
+    if v_player_info == -1:
        return jsonify(v_player_info="INCORRECTLY FORMED GET QUERY TO playerInfo"
     else:
        return v_player_info
