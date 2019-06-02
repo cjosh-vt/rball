@@ -26,8 +26,6 @@ def playerInfo():
     print (v_player_info)
     
     return v_player_info
-        
-
 
 def connect_to_postgres():
     return common_functions_rball.get_pg_connection('rball_app','vMBY8kU3E67Cz2ZC','127.0.0.1','nw_rball_app')
