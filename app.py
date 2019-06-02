@@ -35,6 +35,7 @@ def get_player_info(p_cursor,p_player_id):
        v_player_info = p_cursor.fetchall()
        print (v_player_info)
     except:
+       print ("Unable to query player information...investigate\n" + traceback.format_exc())
     else:
        return jsonify(player_first_name=v_player_info[0][0],
           player_last_name=v_player_info[0][1],
