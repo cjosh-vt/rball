@@ -8,7 +8,8 @@ do
     then
         echo 'Updated!'
         ps -ef | grep -i python3 | grep -i app.py| awk '{kill $2}'
-        python3 app.py &
+        sleep 1s
+        python3 app.py >log.txt&
 	echo 'Server Started!'
     fi
     sleep 10s
