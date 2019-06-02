@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 import common_functions_rball
 import traceback
 import sys
+import psycopg2
 
 app = Flask(__name__)
 
