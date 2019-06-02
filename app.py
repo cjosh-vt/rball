@@ -49,13 +49,13 @@ def playerInfo():
 #which are USED by the application endpoints.
 
 def connect_to_postgres(p_username,p_password):
-"""
-   This module gets a connection to the postgres database being used for the App.
-   @param p_username 
-      - The username to use to connect to the database
-   @param p_password 
-      - The password to use to connect to the nw_rball_app database.
-"""
+   """
+      This module gets a connection to the postgres database being used for the App.
+      @param p_username 
+         - The username to use to connect to the database
+      @param p_password 
+         - The password to use to connect to the nw_rball_app database.
+   """
     return common_functions_rball.get_pg_connection(p_username,p_password,'127.0.0.1','nw_rball_app')
 
 def execute_a_query(p_connection, p_query):
