@@ -52,7 +52,7 @@ def get_player_info(p_cursor,p_player_id):
        p_cursor.execute(v_query)
        v_player_info = p_cursor.fetchall()
     except psycopg2.errors.SyntaxError:
-       p_cursor.rollback()
+       v_conn.rollback()
     except:
        print ("Unable to query player information...investigate\n" + traceback.format_exc())
     else:
@@ -74,7 +74,7 @@ def get_authentication(p_cursor,p_username, p_password):
        p_cursor.execute(v_query)
        v_auth_info = p_cursor.fetchall()
     except psycopg2.errors.SyntaxError:
-       p_cursor.rollback()
+       v_conn.rollback()
     except:
        print("Unable to query database...investigate\n" + traceback.format_exc())
  
@@ -86,6 +86,7 @@ def get_authentication(p_cursor,p_username, p_password):
 def get_connection():
     try:
        global g_cursor
+       global v_conn
        v_conn=connect_to_postgres()
        v_conn.autocommit=False
        g_cursor=v_conn.cursor()
