@@ -49,8 +49,6 @@ def playerInfo():
 #which are USED by the application endpoints.
 
 def connect_to_postgres(p_username,p_password):
-    print ("p_username = " + p_username)
-    print ("p_password = " + p_password)
     return common_functions_rball.get_pg_connection(p_username,p_password,'127.0.0.1','nw_rball_app')
 
 def execute_a_query(p_connection, p_query):
