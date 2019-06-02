@@ -32,7 +32,7 @@ def playerInfo():
     except:
        print ("You didn't pass the right values to playerInfo")
 
-    if v_player:
+    if v_player_id:
        v_player_info = get_player_info(g_cursor, v_player_id)
     else:
        v_player_info = -1
