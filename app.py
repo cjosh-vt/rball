@@ -52,6 +52,7 @@ def get_player_info(p_cursor,p_player_id):
        v_player_info = p_cursor.fetchall()
     except:
        print ("Unable to query player information...investigate\n" + traceback.format_exc())
+       p_cursor.rollback() 
     else:
        print ("v_player_info = " + str(v_player_info))
        if v_player_info is not None:
@@ -63,7 +64,6 @@ def get_player_info(p_cursor,p_player_id):
              skill_description=v_player_info[0][5],
              is_administrator=v_player_info[0][6])
        else:
-          p_cursor.rollback() 
           return -1
 
 def get_authentication(p_cursor,p_username, p_password):
@@ -73,11 +73,11 @@ def get_authentication(p_cursor,p_username, p_password):
        v_auth_info = p_cursor.fetchall()
     except:
        print("Unable to query database...investigate\n" + traceback.format_exc())
-
+       p_cursor.rollback()
+ 
     if len(v_auth_info) > 0:
        return v_auth_info[0][0]
     else:
-       p_cursor.rollback()
        return -1
 
 def get_connection():
