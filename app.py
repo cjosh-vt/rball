@@ -62,7 +62,7 @@ def get_player_info(p_cursor,p_player_id):
              skill_description=v_player_info[0][5],
              is_administrator=v_player_info[0][6])
        else:
-          p_cursor.rollback()
+          p_cursor.rollback() 
 
 def get_authentication(p_cursor,p_username, p_password):
     v_query = ("select player_id from rball_app.auth_login where username = '" + p_username + "' and password = '" + p_password + "'")
