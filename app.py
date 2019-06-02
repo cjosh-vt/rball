@@ -84,6 +84,7 @@ def get_connection():
     try:
        global g_cursor
        v_conn=connect_to_postgres()
+       v_conn.autocommit=False
        g_cursor=v_conn.cursor()
     except:
        print ("Whoops...you're still dumb...\n" + traceback.format_exc())
