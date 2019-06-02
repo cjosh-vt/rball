@@ -59,6 +59,14 @@ def connect_to_postgres(p_username,p_password):
     return common_functions_rball.get_pg_connection(p_username,p_password,'127.0.0.1','nw_rball_app')
 
 def execute_a_query(p_connection, p_query):
+    """
+       This module executes any query it is passed using the connection it's passed and returns the
+       results to the calling functino.
+       @param p_connection
+          - A global connection variable used for the cursor connection to execute the query.
+       @param p_query 
+          - The query to be executed.
+    """
     v_cursor = p_connection.cursor()
     
     try:
@@ -76,6 +84,13 @@ def execute_a_query(p_connection, p_query):
        return v_query_result
 
 def get_player_info(p_connection,p_player_id):
+    """
+       This module creates a query which it then executes and returns results for.
+       @param p_connection  
+          - The global connectino object to be used in querying the database
+       @param p_player_id
+          - The player ID you're requesting information on.
+    """
     v_query = ("select player_first_name, player_last_name, player_phone, player_email, season_description, skill_description, is_administrator from rball_app.player_info where player_id = " + str(p_player_id))
     try:
        v_player_info = execute_a_query(p_connection,v_query)
@@ -94,6 +109,15 @@ def get_player_info(p_connection,p_player_id):
           return -1
 
 def get_authentication(p_connection,p_username, p_password):
+    """
+       This module determines if the requested userID and password are present in the database.
+       @param p_connection
+          - The conneciton object to be used in querying the database.
+       @param p_username
+          - The username the app is trying to log in as.
+       @param p_password  
+          - The password the app is trying to use to log in.
+    """
     v_query = ("select player_id from rball_app.auth_login where username = '" + p_username + "' and password = '" + p_password + "'")
     try:
        v_auth_info = execute_a_query(p_connection,v_query)
@@ -106,6 +130,13 @@ def get_authentication(p_connection,p_username, p_password):
        return -1
 
 def get_connection(p_username,p_password):
+    """
+       The module is called to establish a connection to the database for use in query execution.
+       @param p_username
+          - The username to use when logging into the database
+       @param p_password
+          - The password to use to authenticate against the database.
+    """
     try:
        global g_conn
        g_conn=connect_to_postgres(p_username,p_password)
@@ -114,6 +145,14 @@ def get_connection(p_username,p_password):
        print ("Whoops...you're still dumb...\n" + traceback.format_exc())
        
 def get_credentials():
+    """
+       This module will read a parameter file and get the username and password, which are presumed, currently,
+       to be the only entries.
+       @return v_user
+          - The username to use for authentication against the database
+       @return v_password
+          - The password to use for authentication against the password
+    """
     try:
        parameter_file=open("../parameters/parameters.txt","r")
     except:
@@ -126,9 +165,8 @@ def get_credentials():
 #Main is invoked when the application is started on the server.
 if __name__ == '__main__':
 
-    v_username,v_password=get_credentials()
-
     #We start by connecting to the postgres database
+    v_username,v_password=get_credentials()
     get_connection(v_username,v_password)
     
     #Begin running the application listener
