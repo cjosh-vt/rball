@@ -50,10 +50,10 @@ def get_player_info(p_cursor,p_player_id):
     try:
        p_cursor.execute(v_query)
        v_player_info = p_cursor.fetchall()
-    except:
-       print ("Unable to query player information...investigate\n" + traceback.format_exc())
     except DatabaseError:
        p_cursor.rollback()
+    except:
+       print ("Unable to query player information...investigate\n" + traceback.format_exc())
     else:
        print ("v_player_info = " + str(v_player_info))
        if v_player_info is not None:
@@ -72,6 +72,8 @@ def get_authentication(p_cursor,p_username, p_password):
     try:
        p_cursor.execute(v_query)
        v_auth_info = p_cursor.fetchall()
+    except DatabaseError:
+       p_cursor.rollback()
     except:
        print("Unable to query database...investigate\n" + traceback.format_exc())
  
