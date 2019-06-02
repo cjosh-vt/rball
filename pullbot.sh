@@ -16,7 +16,7 @@ do
         if [ -z "$APP_CODE" ]
         then
             echo{"$APP_CODE"} | awk '{kill $2}'
-            sleep 1s
+            sleep 5s
             python3 app.py & #>log.txt 2>error.txt&
 	    echo 'Server Started!'
         fi
