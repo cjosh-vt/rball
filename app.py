@@ -48,8 +48,8 @@ def playerInfo():
 #This is the end of all application endpoints.  Below here are the functions related to the database
 #which are USED by the application endpoints.
 
-def connect_to_postgres():
-    return common_functions_rball.get_pg_connection('rball_app','vMBY8kU3E67Cz2ZC','127.0.0.1','nw_rball_app')
+def connect_to_postgres(p_username,p_password):
+    return common_functions_rball.get_pg_connection(p_username,p_password,'127.0.0.1','nw_rball_app')
 
 def execute_a_query(p_connection, p_query):
     v_cursor = p_connection.cursor()
@@ -98,9 +98,9 @@ def get_authentication(p_connection,p_username, p_password):
     else:
        return -1
 
-def get_connection():
+def get_connection(p_username,p_password):
     try:
-       v_conn=connect_to_postgres()
+       v_conn=connect_to_postgres(p_username,p_password)
        v_conn.autocommit=False
     except:
        print ("Whoops...you're still dumb...\n" + traceback.format_exc())
@@ -113,15 +113,15 @@ def get_credentials():
     else:
        v_creds=parameter_file.read()
        v_user,v_password=v_creds.split(":")
-       print (v_user + v_password)
+       return v_user,v_password
 
 #Main is invoked when the application is started on the server.
 if __name__ == '__main__':
 
-    v_credentials=get_credentials()
+    v_usersname,v_password=get_credentials()
 
     #We start by connecting to the postgres database
-    get_connection()
+    get_connection(v_username,v_password)
     
     #Begin running the application listener
     app.run('0.0.0.0',port=80)
