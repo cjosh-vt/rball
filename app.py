@@ -118,7 +118,7 @@ def get_credentials():
 #Main is invoked when the application is started on the server.
 if __name__ == '__main__':
 
-    v_usersname,v_password=get_credentials()
+    v_username,v_password=get_credentials()
 
     #We start by connecting to the postgres database
     get_connection(v_username,v_password)
