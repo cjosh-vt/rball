@@ -50,7 +50,6 @@ def get_player_info(p_cursor,p_player_id):
     try:
        p_cursor.execute(v_query)
        v_player_info = p_cursor.fetchall()
-       print (v_player_info)
     except:
        print ("Unable to query player information...investigate\n" + traceback.format_exc())
     else:
