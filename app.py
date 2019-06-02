@@ -115,7 +115,7 @@ def get_credentials():
     else:
        v_creds=parameter_file.read()
        v_user,v_password=v_creds.split(":")
-       return v_user,v_password.decode("utf-8")
+       return v_user,v_password.rstrip("\n")
 
 #Main is invoked when the application is started on the server.
 if __name__ == '__main__':
