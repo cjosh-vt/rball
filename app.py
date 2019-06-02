@@ -112,7 +112,8 @@ def get_credentials():
        print ("ERROR:  Unable to open parameter file.")
     else:
        v_creds=parameter_file.read()
-       print (v_creds)
+       v_user,v_password=v_creds.split(":")
+       print (v_user + v_password)
 
 #Main is invoked when the application is started on the server.
 if __name__ == '__main__':
