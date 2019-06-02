@@ -17,7 +17,7 @@ def login():
        print ("You didn't pass the right values to login")
 
     if v_username and v_password:
-       v_player_id = get_authentication(g_cursor, v_username, v_password)
+       v_player_id = get_authentication(g_conn, v_username, v_password)
     else:
        v_player_id = -1
     
@@ -36,7 +36,7 @@ def playerInfo():
        print ("You didn't pass the right values to playerInfo")
 
     if v_player_id:
-       v_player_info = get_player_info(g_cursor, v_player_id)
+       v_player_info = get_player_info(g_conn, v_player_id)
     else:
        v_player_info = -1
     
@@ -100,8 +100,9 @@ def get_authentication(p_connection,p_username, p_password):
 
 def get_connection(p_username,p_password):
     try:
-       v_conn=connect_to_postgres(p_username,p_password)
-       v_conn.autocommit=False
+       global g_conn
+       g_conn=connect_to_postgres(p_username,p_password)
+       g_conn.autocommit=False
     except:
        print ("Whoops...you're still dumb...\n" + traceback.format_exc())
        
