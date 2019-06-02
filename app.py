@@ -53,6 +53,8 @@ def get_player_info(p_cursor,p_player_id):
        v_player_info = p_cursor.fetchall()
     except psycopg2.errors.SyntaxError:
        v_conn.rollback()
+    except psycopg2.errors.InsufficientPrivilege:
+       v_conn.rollback()
     except:
        print ("Unable to query player information...investigate\n" + traceback.format_exc())
     else:
@@ -74,6 +76,8 @@ def get_authentication(p_cursor,p_username, p_password):
        p_cursor.execute(v_query)
        v_auth_info = p_cursor.fetchall()
     except psycopg2.errors.SyntaxError:
+       v_conn.rollback()
+    except psycopg2.errors.InsufficientPrivilege:
        v_conn.rollback()
     except:
        print("Unable to query database...investigate\n" + traceback.format_exc())
