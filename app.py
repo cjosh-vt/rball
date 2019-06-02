@@ -7,23 +7,40 @@ app = Flask(__name__)
 
 @app.route("/login",methods=['GET'])
 def login():
-    v_username=request.args.get('username')
-    v_password=request.args.get('password')
+    try:
+       v_username=request.args.get('username')
+       v_password=request.args.get('password')
+    except:
+       print ("You didn't pass the right values to login")
 
-    v_player_id = get_authentication(g_cursor, v_username, v_password)
+    if v_username and v_password:
+       v_player_id = get_authentication(g_cursor, v_username, v_password)
+    else:
+       v_player_id = -1
     
-    if v_player_id == -1:
+    if v_player_id == -1 and v_username and v_password:
         return jsonify(player_id="PLAYER NOT FOUND")
+    elif v_player_id == -1:
+        return jsonify(player_id="INCORRECTLY FORMED GET QUERY to login")
     else:
         return jsonify(player_id=v_player_id)
         
 @app.route("/playerInfo",methods=['GET'])
 def playerInfo():
-    v_player_id=request.args.get('playerID')
+    try:
+       v_player_id=request.args.get('playerID')
+    except:
+       print ("You didn't pass the right values to playerInfo")
 
-    v_player_info = get_player_info(g_cursor, v_player_id)
+    if v_player:
+       v_player_info = get_player_info(g_cursor, v_player_id)
+    else:
+       v_player_info = -1
     
-    return v_player_info
+    if v_player_info = -1:
+       return jsonify(v_player_info="INCORRECTLY FORMED GET QUERY TO playerInfo"
+    else:
+       return v_player_info
 
 def connect_to_postgres():
     return common_functions_rball.get_pg_connection('rball_app','vMBY8kU3E67Cz2ZC','127.0.0.1','nw_rball_app')
