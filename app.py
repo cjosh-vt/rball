@@ -23,8 +23,6 @@ def playerInfo():
 
     v_player_info = get_player_info(g_cursor, v_player_id)
     
-    print (v_player_info)
-    
     return v_player_info
 
 def connect_to_postgres():
@@ -32,14 +30,11 @@ def connect_to_postgres():
 
 def get_player_info(p_cursor,p_player_id):
     v_query = ("select player_first_name, player_last_name, player_phone, player_email, season_description, skill_description, is_administrator from rball_app.player_info where player_id = " + str(p_player_id))
-    print (v_query)
     try:
-       print ("trying to run the query...again")
        p_cursor.execute(v_query)
        v_player_info = p_cursor.fetchall()
        print (v_player_info)
     except:
-       print ("Unable to query player information...investigate\n" + traceback.format_exc())
     else:
        return jsonify(player_first_name=v_player_info[0][0],
           player_last_name=v_player_info[0][1],
