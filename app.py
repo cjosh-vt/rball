@@ -53,7 +53,7 @@ def get_player_info(p_cursor,p_player_id):
     except:
        print ("Unable to query player information...investigate\n" + traceback.format_exc())
     else:
-       print (v_player_info)
+       print ("v_player_info = " + str(v_player_info))
        if v_player_info is not None:
           return jsonify(player_first_name=v_player_info[0][0],
              player_last_name=v_player_info[0][1],
