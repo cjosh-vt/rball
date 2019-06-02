@@ -105,9 +105,19 @@ def get_connection():
     except:
        print ("Whoops...you're still dumb...\n" + traceback.format_exc())
        
+def get_credentials():
+    try:
+       parameter_file=open("../parameters/parameters.txt","r")
+    except:
+       print ("ERROR:  Unable to open parameter file.")
+    else:
+       v_creds=parameter_file.read()
+       print v_creds
 
 #Main is invoked when the application is started on the server.
 if __name__ == '__main__':
+
+    v_credentials=get_credentials()
 
     #We start by connecting to the postgres database
     get_connection()
