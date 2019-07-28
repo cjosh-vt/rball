@@ -20,14 +20,14 @@ def login():
        v_player_id = get_authentication(g_conn, v_username, v_password)
     else:
        v_player_id = -1
-    
+
     if v_player_id == -1 and v_username and v_password:
         return jsonify(player_id="PLAYER NOT FOUND")
     elif v_player_id == -1:
         return jsonify(player_id="INCORRECTLY FORMED GET QUERY to login")
     else:
         return jsonify(player_id=v_player_id)
-        
+
 @app.route("/playerInfo",methods=['GET'])
 def playerInfo():
     try:
@@ -39,7 +39,7 @@ def playerInfo():
        v_player_info = get_player_info(g_conn, v_player_id)
     else:
        v_player_info = -1
-    
+
     if v_player_info == -1:
        return jsonify(v_player_info="INCORRECTLY FORMED GET QUERY TO playerInfo")
     else:
@@ -51,9 +51,9 @@ def playerInfo():
 def connect_to_postgres(p_username,p_password):
     """
        This module gets a connection to the postgres database being used for the App.
-       @param p_username 
+       @param p_username
           - The username to use to connect to the database
-       @param p_password 
+       @param p_password
           - The password to use to connect to the nw_rball_app database.
     """
     return common_functions_rball.get_pg_connection(p_username,p_password,'127.0.0.1','nw_rball_app')
@@ -64,11 +64,11 @@ def execute_a_query(p_connection, p_query):
        results to the calling functino.
        @param p_connection
           - A global connection variable used for the cursor connection to execute the query.
-       @param p_query 
+       @param p_query
           - The query to be executed.
     """
     v_cursor = p_connection.cursor()
-    
+
     try:
        v_cursor.execute(p_query)
        v_query_result=v_cursor.fetchall()
@@ -86,12 +86,12 @@ def execute_a_query(p_connection, p_query):
 def get_player_info(p_connection,p_player_id):
     """
        This module creates a query which it then executes and returns results for.
-       @param p_connection  
+       @param p_connection
           - The global connectino object to be used in querying the database
        @param p_player_id
           - The player ID you're requesting information on.
     """
-    v_query = ("select player_first_name, player_last_name, player_phone, player_email, season_description, skill_description, is_administrator from rball_app.player_info where player_id = " + str(p_player_id))
+    v_query = ("select player_first_name, player_last_name, player_phone, player_email, season_description, skill_description, is_administrator from rball_app.player_info_vw where player_id = " + str(p_player_id))
     try:
        v_player_info = execute_a_query(p_connection,v_query)
     except:
@@ -115,15 +115,15 @@ def get_authentication(p_connection,p_username, p_password):
           - The conneciton object to be used in querying the database.
        @param p_username
           - The username the app is trying to log in as.
-       @param p_password  
+       @param p_password
           - The password the app is trying to use to log in.
     """
-    v_query = ("select player_id from rball_app.auth_login where username = '" + p_username + "' and password = '" + p_password + "'")
+    v_query = ("select player_id from rball_app.auth_login_vw where username = '" + p_username + "' and password = '" + p_password + "'")
     try:
        v_auth_info = execute_a_query(p_connection,v_query)
     except:
        print("Unable to query database...investigate\n" + traceback.format_exc())
- 
+
     if len(v_auth_info) > 0:
        return v_auth_info[0][0]
     else:
@@ -143,7 +143,7 @@ def get_connection(p_username,p_password):
        g_conn.autocommit=False
     except:
        print ("Whoops...you're still dumb...\n" + traceback.format_exc())
-       
+
 def get_credentials():
     """
        This module will read a parameter file and get the username and password, which are presumed, currently,
@@ -168,6 +168,6 @@ if __name__ == '__main__':
     #We start by connecting to the postgres database
     v_username,v_password=get_credentials()
     get_connection(v_username,v_password)
-    
+
     #Begin running the application listener
     app.run('0.0.0.0',port=80)
