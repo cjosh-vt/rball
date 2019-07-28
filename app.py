@@ -91,7 +91,7 @@ def get_player_info(p_connection,p_player_id):
        @param p_player_id
           - The player ID you're requesting information on.
     """
-    v_query = ("select player_first_name, player_last_name, player_phone, player_email, season_description, skill_description, is_administrator from rball_app.v_player_info where player_id = " + str(p_player_id))
+    v_query = ("select player_first_name, player_last_name, player_phone, player_email, season_description, skill_description, is_administrator from rball_app.player_info_vw where player_id = " + str(p_player_id))
     try:
        v_player_info = execute_a_query(p_connection,v_query)
     except:
@@ -118,7 +118,7 @@ def get_authentication(p_connection,p_username, p_password):
        @param p_password
           - The password the app is trying to use to log in.
     """
-    v_query = ("select player_id from rball_app.v_auth_login where username = '" + p_username + "' and password = '" + p_password + "'")
+    v_query = ("select player_id from rball_app.auth_login_vw where username = '" + p_username + "' and password = '" + p_password + "'")
     try:
        v_auth_info = execute_a_query(p_connection,v_query)
     except:
