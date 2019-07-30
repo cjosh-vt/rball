@@ -92,6 +92,27 @@ def execute_a_query(p_connection, p_query):
     else:
        return v_query_result
 
+def get_next_Match(p_connection,p_player_id):
+    """
+       This module creates a query which it then executes to get the next match for
+       a given player ID.
+       @param get_pg_connection
+          - The global connection object to be used in querying the database.
+       @param p_player_id
+          - The ID of the player to query for.
+    """
+    v_query = ("select court_description, game_time from next_match_vw where player_id = " + str(p_player_id)
+    try:
+        v_next_match = execute_a_query(p_connection,v_query)
+    except:
+        print ("Unable to query mext match information...investigate\n" + traceback.format_exc())
+    else:
+        if v_next_match is not None:
+            return jsonify(next_match_court=v_next_match[0][0],
+            next_match_game_time=v_next_match[0][1])
+        else:
+            return -1
+
 def get_player_info(p_connection,p_player_id):
     """
        This module creates a query which it then executes and returns results for.
