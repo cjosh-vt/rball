@@ -113,6 +113,7 @@ def get_next_match(p_connection,p_player_id):
     print (v_query)
     try:
         v_next_match = execute_a_query(p_connection,v_query)
+        print ("v_next_match = " + str (v_next_match))
     except:
         print ("Unable to query mext match information...investigate\n" + traceback.format_exc())
     else:
