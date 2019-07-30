@@ -58,7 +58,7 @@ def nextMatch():
         v_match_info = -1
 
     if v_match_info == -1:
-       return jsonify(v_player_info="INCORRECTLY FORMED GET QUERY TO playerInfo")
+       return jsonify(v_player_info="INCORRECTLY FORMED GET QUERY TO nextMatch")
     else:
        return v_match_info
 
