@@ -98,7 +98,7 @@ def execute_a_query(p_connection, p_query):
     except:
        print ("Failed to execute query:  \n" + p_query + "\n" + traceback.format_exc())
     else:
-	   print (v_query_result)
+       print (v_query_result)
 	   return v_query_result
 
 def get_next_match(p_connection,p_player_id):
