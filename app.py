@@ -46,13 +46,13 @@ def playerInfo():
        return v_player_info
 
 @app.route("/nextMatch",methods=['GET'])
-def nextMatch:
+def nextMatch():
     try:
         v_player_id=request.args.get('playerID')
     except:
         print ("You didn't pass the right values to nextMatch")
     else:
-        print ("Getting next match info")     
+        print ("Getting next match info")
 
 #This is the end of all application endpoints.  Below here are the functions related to the database
 #which are USED by the application endpoints.
