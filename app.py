@@ -84,8 +84,8 @@ def execute_a_query(p_connection, p_query):
        @param p_query
           - The query to be executed.
     """
-    v_cursor = p_connection.cursor()
-    print ("connection = " + str(p_connection) + " p_query = " + str(p_query))
+
+    v_cursor = p_connection.get_cursor()
 
     try:
        v_cursor.execute(p_query)
@@ -99,7 +99,7 @@ def execute_a_query(p_connection, p_query):
     except:
        print ("Failed to execute query:  \n" + p_query + "\n" + traceback.format_exc())
     else:
-       print (v_query_result)
+	   v_cursor.close()
        return v_query_result
 
 def get_next_match(p_connection,p_player_id):
