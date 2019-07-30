@@ -85,6 +85,7 @@ def execute_a_query(p_connection, p_query):
           - The query to be executed.
     """
     v_cursor = p_connection.cursor()
+    print ("connection = " + str(p_connection) + " p_query = " + str(p_query))
 
     try:
        v_cursor.execute(p_query)
