@@ -110,6 +110,7 @@ def get_next_match(p_connection,p_player_id):
           - The ID of the player to query for.
     """
     v_query = ("select court_description, game_time from next_match_vw where player_id = " + str(p_player_id))
+    print (v_query)
     try:
         v_next_match = execute_a_query(p_connection,v_query)
     except:
