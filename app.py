@@ -86,7 +86,7 @@ def execute_a_query(p_connection, p_query):
     """
 
     v_cursor = p_connection.get_cursor()
-	print (v_cursor)
+    print (v_cursor)
 
     try:
        v_cursor.execute(p_query)
