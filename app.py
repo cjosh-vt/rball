@@ -51,8 +51,16 @@ def nextMatch():
         v_player_id=request.args.get('playerID')
     except:
         print ("You didn't pass the right values to nextMatch")
+
+    if v_player_id:
+        v_match_info = get_next_match(g_conn,v_player_id)
     else:
-        return ("Getting next match info")
+        v_match_info = -1
+
+    if v_match_info == -1:
+       return jsonify(v_player_info="INCORRECTLY FORMED GET QUERY TO playerInfo")
+    else:
+       return v_match_info
 
 #This is the end of all application endpoints.  Below here are the functions related to the database
 #which are USED by the application endpoints.
@@ -92,7 +100,7 @@ def execute_a_query(p_connection, p_query):
     else:
        return v_query_result
 
-def get_next_Match(p_connection,p_player_id):
+def get_next_match(p_connection,p_player_id):
     """
        This module creates a query which it then executes to get the next match for
        a given player ID.
