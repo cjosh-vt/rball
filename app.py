@@ -86,7 +86,6 @@ def execute_a_query(p_connection, p_query):
     """
 
     v_cursor = p_connection.cursor()
-    print (v_cursor)
 
     try:
        v_cursor.execute(p_query)
@@ -112,7 +111,7 @@ def get_next_match(p_connection,p_player_id):
        @param p_player_id
           - The ID of the player to query for.
     """
-    v_query = ("select court_description, game_time from next_match_vw where player_id = " + str(p_player_id))
+    v_query = ("select court_description, game_time from rballapp.next_match_vw where player_id = " + str(p_player_id))
     print (v_query)
     try:
         v_next_match = execute_a_query(p_connection,v_query)
