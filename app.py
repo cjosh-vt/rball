@@ -22,7 +22,7 @@ def login():
        v_player_id = -1
 
     if v_player_id == -1 and v_username and v_password:
-        return jsonify(player_id="PLAYER NOT FOUND")
+        return jsonify(player_id="")
     elif v_player_id == -1:
         return jsonify(player_id="INCORRECTLY FORMED GET QUERY to login")
     else:
