@@ -123,7 +123,7 @@ def get_next_match(p_connection,p_player_id):
             return jsonify(next_match_court=v_next_match[0][0],
             next_match_game_time=v_next_match[0][1])
         else:
-            return -1
+            return jsonify("No future scheduled matches")
 
 def get_player_info(p_connection,p_player_id):
     """
