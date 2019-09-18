@@ -56,8 +56,6 @@ def nextMatch():
         v_match_info = get_next_match(g_conn,v_player_id)
     else:
         v_match_info = -1
-		
-	print ("v_match_info = " + v_match_info)
 
     if v_match_info == -1:
        return jsonify(v_player_info="INCORRECTLY FORMED GET QUERY TO nextMatch")
@@ -125,7 +123,7 @@ def get_next_match(p_connection,p_player_id):
             return jsonify(next_match_court=v_next_match[0][0],
             next_match_game_time=v_next_match[0][1])
         else:
-            return jsonify("No future scheduled matches for playerID " + p_player_id)
+            return -1
 
 def get_player_info(p_connection,p_player_id):
     """
